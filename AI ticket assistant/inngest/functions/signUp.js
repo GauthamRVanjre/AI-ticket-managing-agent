@@ -1,5 +1,5 @@
 import { inngest } from "../index.js";
-import user, { User } from "../../models/user.js";
+import User from "../../models/user.js";
 import { NonRetriableError } from "inngest";
 import { sendEmail } from "../../utils/mailer.js";
 
@@ -13,8 +13,8 @@ export const onSignUp = inngest.createFunction(
     // registering an user
     try {
       const { email } = event.data;
-      const user = await step.run("get-user-email", async () => {
-        const userObject = await user.findOne(email);
+      const userDetails = await step.run("get-user-email", async () => {
+        const userObject = await User.findOne(email);
         if (!userObject) {
           throw new NonRetriableError("User does not exist in Database");
         }
@@ -26,7 +26,7 @@ export const onSignUp = inngest.createFunction(
         const subject = "Welcome to AI Ticket Assistant";
         const message = `Hi , welcome to AI Ticket Assistant! We're excited to have you on board.`;
 
-        await sendEmail(user.email, subject, message);
+        await sendEmail(userDetails.email, subject, message);
       });
 
       return { success: true };
