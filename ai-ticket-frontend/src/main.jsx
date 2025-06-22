@@ -4,10 +4,10 @@ import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CheckAuth from "./components/check-auth";
 import Tickets from "./pages/tickets";
-import Ticket from "./pages/ticket";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
 import Admin from "./pages/admin";
+import TicketDetailsPage from "./pages/ticket";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -26,7 +26,7 @@ createRoot(document.getElementById("root")).render(
           path="/tickets/:id"
           element={
             <CheckAuth protected={true}>
-              <Ticket />
+              <TicketDetailsPage />
             </CheckAuth>
           }
         />
