@@ -7,8 +7,10 @@ const CheckAuth = ({ children, protectedRoute }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log("token", token, "protectedRoute", protectedRoute);
     if (protectedRoute) {
-      if (!token) {
+      if (token === null) {
+        console.log("no token");
         navigate("/login");
       } else {
         setLoading(false);
