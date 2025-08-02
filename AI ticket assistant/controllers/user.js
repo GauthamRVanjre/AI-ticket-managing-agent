@@ -5,13 +5,26 @@ import { inngest } from "../inngest/index.js";
 
 export const signUp = async (req, res) => {
   try {
-    const { email, password, skills = [] } = req.body;
+    const { email, password, skills = [], code } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
+    let userRole = "user";
+
+    if (code === "moderator") {
+      userRole = "moderator";
+    } else if (code === "admin") {
+      userRole = "admin";
+    }
+
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
 
     const user = await User.create({
       email,
       password: hashedPassword,
       skills,
+      role: userRole,
     });
 
     // Send user.signup event to Inngest
@@ -105,7 +118,7 @@ export const updateUser = async (req, res) => {
 export const getUsers = async (req, res) => {
   try {
     if (req.user?.role !== "admin") {
-      res.status(403).json({ error: "Not authorized" });
+      return res.status(403).json({ error: "Not authorized" });
     }
     const users = await User.find().select("-password");
     res.json(users);
