@@ -43,10 +43,10 @@ export const signUp = async (req, res) => {
       }
     );
 
-    res.json({ user, token });
+    return res.json({ user, token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -73,9 +73,9 @@ export const login = async (req, res) => {
       }
     );
 
-    res.json({ user, token });
+    return res.json({ user, token });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -92,7 +92,7 @@ export const logout = async (req, res) => {
       return res.status(200).json({ message: "Logout successful" });
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -100,7 +100,7 @@ export const updateUser = async (req, res) => {
   try {
     const { skills = [], role, email } = req.body;
     if (req.user?.role !== "admin") {
-      res.status(403).json({ error: "Not authorized" });
+      return res.status(403).json({ error: "Not authorized" });
     }
 
     const user = User.findOne({ email });
@@ -111,7 +111,7 @@ export const updateUser = async (req, res) => {
       { email },
       { skills: skills.length ? skills : user.skills, role: role }
     );
-    res.json(updatedUser);
+    return res.json(updatedUser);
   } catch (error) {}
 };
 
@@ -121,8 +121,8 @@ export const getUsers = async (req, res) => {
       return res.status(403).json({ error: "Not authorized" });
     }
     const users = await User.find().select("-password");
-    res.json(users);
+    return res.json(users);
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };

@@ -3,7 +3,6 @@ import Ticket from "../models/ticket.js";
 
 export const createTicket = async (req, res) => {
   try {
-    console.log("hit");
     const { title, description } = req.body;
 
     if (!title || !description) {
@@ -33,7 +32,6 @@ export const createTicket = async (req, res) => {
       newTicket,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       message: `Internal Server Error: ${error.message}`,
     });
@@ -80,10 +78,10 @@ export const getTicket = async (req, res) => {
     }
 
     if (!ticket) {
-      res.status(404).json({ message: "Ticket Not Found" });
+      return res.status(404).json({ message: "Ticket Not Found" });
     }
 
-    res.status(200).json(ticket);
+    return res.status(200).json(ticket);
   } catch (error) {
     return res.status(500).json({
       message: "Internal Server Error",
