@@ -11,11 +11,11 @@ export default function Tickets() {
   const fetchTickets = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/tickets`, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Token ${token}` },
         method: "GET",
       });
       const data = await res.json();
-      setTickets(data.tickets || []);
+      setTickets(data || []);
     } catch (err) {
       console.error("Failed to fetch tickets:", err);
     }
