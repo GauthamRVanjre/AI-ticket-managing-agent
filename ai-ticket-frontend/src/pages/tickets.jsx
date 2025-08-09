@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Tickets() {
@@ -59,48 +59,62 @@ export default function Tickets() {
   };
 
   return (
-    <div className="p-4 max-w-3xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Create Ticket</h2>
+    <div className="space-y-8">
+      <section>
+        <h2 className="section-title mb-4">Create Ticket</h2>
+        <form onSubmit={handleSubmit} className="card p-6 space-y-4">
+          <div>
+            <label className="mb-2 block text-sm">Title</label>
+            <input
+              name="title"
+              value={form.title}
+              onChange={handleChange}
+              placeholder="Short, descriptive title"
+              required
+            />
+          </div>
+          <div>
+            <label className="mb-2 block text-sm">Description</label>
+            <textarea
+              name="description"
+              value={form.description}
+              onChange={handleChange}
+              placeholder="Describe the issue or request with relevant details"
+              rows={5}
+              required
+            />
+          </div>
+          <div className="flex items-center gap-3">
+            <button className="primary" type="submit" disabled={loading}>
+              {loading ? "Submitting..." : "Submit Ticket"}
+            </button>
+          </div>
+        </form>
+      </section>
 
-      <form onSubmit={handleSubmit} className="space-y-3 mb-8">
-        <input
-          name="title"
-          value={form.title}
-          onChange={handleChange}
-          placeholder="Ticket Title"
-          className="input input-bordered w-full"
-          required
-        />
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          placeholder="Ticket Description"
-          className="textarea textarea-bordered w-full"
-          required
-        ></textarea>
-        <button className="btn btn-primary" type="submit" disabled={loading}>
-          {loading ? "Submitting..." : "Submit Ticket"}
-        </button>
-      </form>
-
-      <h2 className="text-xl font-semibold mb-2">All Tickets</h2>
-      <div className="space-y-3">
-        {tickets.map((ticket) => (
-          <Link
-            key={ticket._id}
-            className="card shadow-md p-4 bg-gray-800"
-            to={`/tickets/${ticket._id}`}
-          >
-            <h3 className="font-bold text-lg">{ticket.title}</h3>
-            <p className="text-sm">{ticket.description}</p>
-            <p className="text-sm text-gray-500">
-              Created At: {new Date(ticket.createdAt).toLocaleString()}
-            </p>
-          </Link>
-        ))}
-        {tickets.length === 0 && <p>No tickets submitted yet.</p>}
-      </div>
+      <section>
+        <h2 className="section-title mb-4">All Tickets</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tickets.map((ticket) => (
+            <Link
+              key={ticket._id}
+              className="card p-4 hover:border-sky-700 hover:shadow-sky-900/10 transition"
+              to={`/tickets/${ticket._id}`}
+            >
+              <h3 className="font-semibold text-neutral-100">{ticket.title}</h3>
+              <p className="mt-1 line-clamp-3 text-sm text-neutral-400">
+                {ticket.description}
+              </p>
+              <p className="mt-3 text-xs text-neutral-500">
+                Created: {new Date(ticket.createdAt).toLocaleString()}
+              </p>
+            </Link>
+          ))}
+        </div>
+        {tickets.length === 0 && (
+          <p className="text-sm text-neutral-400">No tickets submitted yet.</p>
+        )}
+      </section>
     </div>
   );
 }

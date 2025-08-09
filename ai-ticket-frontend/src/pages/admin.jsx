@@ -84,66 +84,68 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-6">Admin Panel - Manage Users</h1>
+    <div className="max-w-4xl mx-auto">
+      <h1 className="text-2xl font-semibold mb-4">
+        Admin Panel - Manage Users
+      </h1>
       <input
         type="text"
-        className="input input-bordered w-full mb-6"
+        className="mb-6"
         placeholder="Search by email"
         value={searchQuery}
         onChange={handleSearch}
       />
       {filteredUsers.map((user) => (
-        <div
-          key={user._id}
-          className="bg-base-100 shadow rounded p-4 mb-4 border"
-        >
-          <p>
-            <strong>Email:</strong> {user.email}
+        <div key={user._id} className="card p-4 mb-4">
+          <p className="text-sm text-neutral-300">
+            <span className="text-neutral-400">Email:</span> {user.email}
           </p>
-          <p>
-            <strong>Current Role:</strong> {user.role}
+          <p className="text-sm text-neutral-300 mt-1">
+            <span className="text-neutral-400">Current Role:</span> {user.role}
           </p>
-          <p>
-            <strong>Skills:</strong>{" "}
+          <p className="text-sm text-neutral-300 mt-1">
+            <span className="text-neutral-400">Skills:</span>{" "}
             {user.skills && user.skills.length > 0
               ? user.skills.join(", ")
               : "N/A"}
           </p>
 
           {editingUser === user.email ? (
-            <div className="mt-4 space-y-2">
-              <select
-                className="select select-bordered w-full"
-                value={formData.role}
-                onChange={(e) =>
-                  setFormData({ ...formData, role: e.target.value })
-                }
-              >
-                <option value="user">User</option>
-                <option value="moderator">Moderator</option>
-                <option value="admin">Admin</option>
-              </select>
+            <div className="mt-4 space-y-3">
+              <div>
+                <label className="mb-2 block text-sm">Role</label>
+                <select
+                  className="w-full"
+                  value={formData.role}
+                  onChange={(e) =>
+                    setFormData({ ...formData, role: e.target.value })
+                  }
+                >
+                  <option value="user">User</option>
+                  <option value="moderator">Moderator</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
 
-              <input
-                type="text"
-                placeholder="Comma-separated skills"
-                className="input input-bordered w-full"
-                value={formData.skills}
-                onChange={(e) =>
-                  setFormData({ ...formData, skills: e.target.value })
-                }
-              />
+              <div>
+                <label className="mb-2 block text-sm">
+                  Comma-separated skills
+                </label>
+                <input
+                  type="text"
+                  value={formData.skills}
+                  onChange={(e) =>
+                    setFormData({ ...formData, skills: e.target.value })
+                  }
+                />
+              </div>
 
               <div className="flex gap-2">
-                <button
-                  className="btn btn-success btn-sm"
-                  onClick={handleUpdate}
-                >
+                <button className="primary" onClick={handleUpdate}>
                   Save
                 </button>
                 <button
-                  className="btn btn-ghost btn-sm"
+                  className="secondary"
                   onClick={() => setEditingUser(null)}
                 >
                   Cancel
@@ -152,7 +154,7 @@ export default function AdminPanel() {
             </div>
           ) : (
             <button
-              className="btn btn-primary btn-sm mt-2"
+              className="primary mt-3"
               onClick={() => handleEditClick(user)}
             >
               Edit

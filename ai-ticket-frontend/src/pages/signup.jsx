@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
   const [form, setForm] = useState({ email: "", password: "", code: "" });
@@ -43,51 +43,71 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-base-200">
-      <div className="card w-full max-w-sm shadow-xl bg-base-100">
-        <form onSubmit={handleSignup} className="card-body">
-          <h2 className="card-title justify-center">Sign Up</h2>
-
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            className="input input-bordered"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            className="input input-bordered"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
-
-          <input
-            type="text"
-            name="code"
-            placeholder="Referral Code (Optional)"
-            className="input input-bordered"
-            value={form.code}
-            onChange={handleChange}
-            required
-          />
-
-          <div className="form-control mt-4">
-            <button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={loading}
-            >
+    <div className="min-h-screen grid lg:grid-cols-2">
+      <div className="hidden lg:flex items-center justify-center p-12 border-r border-neutral-800 bg-gradient-to-b from-sky-900/20 to-neutral-900">
+        <div className="max-w-md text-center">
+          <div className="mx-auto mb-6 h-12 w-12 rounded-lg bg-sky-600" />
+          <h1 className="text-2xl font-semibold">Join Atlas Helpdesk</h1>
+          <p className="mt-2 text-neutral-400">
+            Create an account to submit tickets and collaborate with moderators.
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center justify-center p-6">
+        <div className="w-full max-w-md">
+          <div className="mb-8 text-center">
+            <h2 className="text-xl font-semibold">Create your account</h2>
+            <p className="mt-1 text-sm text-neutral-400">
+              Start tracking your requests
+            </p>
+          </div>
+          <form onSubmit={handleSignup} className="space-y-4 card p-6">
+            <div>
+              <label className="mb-2 block text-sm">Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label className="mb-2 block text-sm">Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <label className="mb-2 block text-sm">
+                Referral Code (Optional)
+              </label>
+              <input
+                type="text"
+                name="code"
+                placeholder="TEAM-2025"
+                value={form.code}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <button type="submit" className="primary w-full" disabled={loading}>
               {loading ? "Signing up..." : "Sign Up"}
             </button>
-          </div>
-        </form>
+            <p className="text-center text-sm text-neutral-400">
+              Already have an account?{" "}
+              <Link className="hover:text-white" to="/login">
+                Login
+              </Link>
+            </p>
+          </form>
+        </div>
       </div>
     </div>
   );

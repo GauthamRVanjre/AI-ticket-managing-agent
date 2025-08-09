@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router-dom";
 
 export default function TicketDetailsPage() {
   const { id } = useParams();
@@ -38,58 +38,68 @@ export default function TicketDetailsPage() {
   }, [id]);
 
   if (loading)
-    return <div className="text-center mt-10">Loading ticket details...</div>;
-  if (!ticket) return <div className="text-center mt-10">Ticket not found</div>;
+    return (
+      <div className="flex items-center justify-center py-20">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-sky-500 border-t-transparent" />
+      </div>
+    );
+  if (!ticket)
+    return (
+      <div className="text-center mt-10 text-neutral-400">Ticket not found</div>
+    );
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">Ticket Details</h2>
+    <div className="max-w-3xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-4">Ticket Details</h2>
 
-      <div className="card bg-gray-800 shadow p-4 space-y-4">
-        <h3 className="text-xl font-semibold">{ticket.title}</h3>
-        <p>{ticket.description}</p>
+      <div className="card p-6 space-y-4">
+        <h3 className="text-xl font-semibold text-neutral-100">
+          {ticket.title}
+        </h3>
+        <p className="text-neutral-300">{ticket.description}</p>
 
-        {/* Conditionally render extended details */}
         {ticket.status && (
-          <>
-            <div className="divider">Metadata</div>
-            <p>
-              <strong>Status:</strong> {ticket.status}
+          <div className="pt-4 border-t border-neutral-800 space-y-3">
+            <h4 className="text-sm font-medium text-neutral-300">Metadata</h4>
+            <p className="text-sm text-neutral-300">
+              <span className="text-neutral-400">Status:</span> {ticket.status}
             </p>
             {ticket.priority && (
-              <p>
-                <strong>Priority:</strong> {ticket.priority}
+              <p className="text-sm text-neutral-300">
+                <span className="text-neutral-400">Priority:</span>{" "}
+                {ticket.priority}
               </p>
             )}
 
             {ticket.relatedSkills?.length > 0 && (
-              <p>
-                <strong>Related Skills:</strong>{" "}
+              <p className="text-sm text-neutral-300">
+                <span className="text-neutral-400">Related Skills:</span>{" "}
                 {ticket.relatedSkills.join(", ")}
               </p>
             )}
 
             {ticket.helpfulNotes && (
-              <div>
-                <strong>Helpful Notes:</strong>
-                <div className="prose max-w-none rounded mt-2">
+              <div className="text-sm text-neutral-300">
+                <div className="text-neutral-400 mb-1">Helpful Notes:</div>
+                <div className="rounded-md border border-neutral-800 bg-neutral-900 p-3">
                   <ReactMarkdown>{ticket.helpfulNotes}</ReactMarkdown>
                 </div>
               </div>
             )}
 
             {ticket.assignedTo && (
-              <p>
-                <strong>Assigned To:</strong> {ticket.assignedTo?.email}
+              <p className="text-sm text-neutral-300">
+                <span className="text-neutral-400">Assigned To:</span>{" "}
+                {ticket.assignedTo?.email}
               </p>
             )}
 
             {ticket.createdAt && (
-              <p className="text-sm text-gray-500 mt-2">
-                Created At: {new Date(ticket.createdAt).toLocaleString()}
+              <p className="text-xs text-neutral-500">
+                Created: {new Date(ticket.createdAt).toLocaleString()}
               </p>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

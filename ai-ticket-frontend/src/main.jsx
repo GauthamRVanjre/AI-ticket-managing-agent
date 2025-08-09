@@ -1,13 +1,14 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CheckAuth from "./components/check-auth";
-import Tickets from "./pages/tickets";
+import Layout from "./components/Layout";
+import "./index.css";
+import Admin from "./pages/admin";
 import Login from "./pages/login";
 import SignUp from "./pages/signup";
-import Admin from "./pages/admin";
 import TicketDetailsPage from "./pages/ticket";
+import Tickets from "./pages/tickets";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -17,7 +18,9 @@ createRoot(document.getElementById("root")).render(
           path="/"
           element={
             <CheckAuth protectedRoute={true}>
-              <Tickets />
+              <Layout>
+                <Tickets />
+              </Layout>
             </CheckAuth>
           }
         />
@@ -26,7 +29,9 @@ createRoot(document.getElementById("root")).render(
           path="/tickets/:id"
           element={
             <CheckAuth protectedRoute={true}>
-              <TicketDetailsPage />
+              <Layout>
+                <TicketDetailsPage />
+              </Layout>
             </CheckAuth>
           }
         />
@@ -53,7 +58,9 @@ createRoot(document.getElementById("root")).render(
           path="/admin"
           element={
             <CheckAuth protectedRoute={true}>
-              <Admin />
+              <Layout>
+                <Admin />
+              </Layout>
             </CheckAuth>
           }
         />

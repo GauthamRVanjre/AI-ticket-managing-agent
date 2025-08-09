@@ -24,7 +24,11 @@ const CheckAuth = ({ children, protectedRoute }) => {
   }, [navigate, protectedRoute]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-neutral-950 to-neutral-900">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-sky-500 border-t-transparent" />
+      </div>
+    );
   }
 
   return children;
