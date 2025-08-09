@@ -84,10 +84,26 @@ export default function AdminPanel() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <h1 className="text-2xl font-semibold mb-4">
-        Admin Panel - Manage Users
-      </h1>
+    <div className="max-w-6xl mx-auto">
+      <h1 className="page-title mb-4">Admin Dashboard</h1>
+
+      {/* Analytics (UI only) */}
+      <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="kpi-card">
+          <div className="kpi-label">Avg Resolution Time</div>
+          <div className="kpi-value mt-1">—</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Ticket Volume</div>
+          <div className="kpi-value mt-1">—</div>
+        </div>
+        <div className="kpi-card">
+          <div className="kpi-label">Moderator Performance</div>
+          <div className="kpi-value mt-1">—</div>
+        </div>
+      </div>
+
+      <h2 className="section-title mb-2">Manage Users</h2>
       <input
         type="text"
         className="mb-6"

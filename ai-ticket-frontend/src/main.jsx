@@ -6,6 +6,7 @@ import Layout from "./components/Layout";
 import "./index.css";
 import Admin from "./pages/admin";
 import Login from "./pages/login";
+import Moderator from "./pages/moderator";
 import SignUp from "./pages/signup";
 import TicketDetailsPage from "./pages/ticket";
 import Tickets from "./pages/tickets";
@@ -60,6 +61,17 @@ createRoot(document.getElementById("root")).render(
             <CheckAuth protectedRoute={true}>
               <Layout>
                 <Admin />
+              </Layout>
+            </CheckAuth>
+          }
+        />
+
+        <Route
+          path="/moderator"
+          element={
+            <CheckAuth protectedRoute={true}>
+              <Layout>
+                <Moderator />
               </Layout>
             </CheckAuth>
           }

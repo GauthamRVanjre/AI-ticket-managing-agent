@@ -49,8 +49,14 @@ export default function TicketDetailsPage() {
     );
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <h2 className="text-2xl font-semibold mb-4">Ticket Details</h2>
+    <div className="max-w-4xl mx-auto">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="page-title">Ticket Details</h2>
+        <div className="flex flex-wrap gap-2">
+          {ticket.status && <span className="badge">{ticket.status}</span>}
+          {ticket.priority && <span className="badge">{ticket.priority}</span>}
+        </div>
+      </div>
 
       <div className="card p-6 space-y-4">
         <h3 className="text-xl font-semibold text-neutral-100">
@@ -58,47 +64,32 @@ export default function TicketDetailsPage() {
         </h3>
         <p className="text-neutral-300">{ticket.description}</p>
 
-        {ticket.status && (
-          <div className="pt-4 border-t border-neutral-800 space-y-3">
-            <h4 className="text-sm font-medium text-neutral-300">Metadata</h4>
+        <div className="pt-4 border-t border-neutral-800 grid gap-4 sm:grid-cols-2">
+          {ticket.assignedTo && (
             <p className="text-sm text-neutral-300">
-              <span className="text-neutral-400">Status:</span> {ticket.status}
+              <span className="text-neutral-400">Assigned To:</span>{" "}
+              {ticket.assignedTo?.email}
             </p>
-            {ticket.priority && (
-              <p className="text-sm text-neutral-300">
-                <span className="text-neutral-400">Priority:</span>{" "}
-                {ticket.priority}
-              </p>
-            )}
+          )}
+          {ticket.relatedSkills?.length > 0 && (
+            <p className="text-sm text-neutral-300">
+              <span className="text-neutral-400">Related Skills:</span>{" "}
+              {ticket.relatedSkills.join(", ")}
+            </p>
+          )}
+          {ticket.createdAt && (
+            <p className="text-xs text-neutral-500 sm:col-span-2">
+              Created: {new Date(ticket.createdAt).toLocaleString()}
+            </p>
+          )}
+        </div>
 
-            {ticket.relatedSkills?.length > 0 && (
-              <p className="text-sm text-neutral-300">
-                <span className="text-neutral-400">Related Skills:</span>{" "}
-                {ticket.relatedSkills.join(", ")}
-              </p>
-            )}
-
-            {ticket.helpfulNotes && (
-              <div className="text-sm text-neutral-300">
-                <div className="text-neutral-400 mb-1">Helpful Notes:</div>
-                <div className="rounded-md border border-neutral-800 bg-neutral-900 p-3">
-                  <ReactMarkdown>{ticket.helpfulNotes}</ReactMarkdown>
-                </div>
-              </div>
-            )}
-
-            {ticket.assignedTo && (
-              <p className="text-sm text-neutral-300">
-                <span className="text-neutral-400">Assigned To:</span>{" "}
-                {ticket.assignedTo?.email}
-              </p>
-            )}
-
-            {ticket.createdAt && (
-              <p className="text-xs text-neutral-500">
-                Created: {new Date(ticket.createdAt).toLocaleString()}
-              </p>
-            )}
+        {ticket.helpfulNotes && (
+          <div className="pt-4 border-t border-neutral-800 space-y-2">
+            <div className="text-sm text-neutral-400">Helpful Notes</div>
+            <div className="rounded-md border border-neutral-800 bg-neutral-900 p-3 text-sm text-neutral-300">
+              <ReactMarkdown>{ticket.helpfulNotes}</ReactMarkdown>
+            </div>
           </div>
         )}
       </div>

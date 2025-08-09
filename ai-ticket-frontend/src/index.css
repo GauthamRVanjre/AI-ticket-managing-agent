@@ -43,3 +43,29 @@ button.secondary {
 .section-title {
   @apply text-xl font-semibold tracking-tight;
 }
+
+/* Badges */
+.badge {
+  @apply inline-flex items-center rounded-full border border-neutral-800 bg-neutral-900/80 px-2.5 py-0.5 text-xs font-medium text-neutral-300 backdrop-blur-sm;
+}
+
+/* Page title helper */
+.page-title {
+  @apply text-2xl font-semibold tracking-tight;
+}
+
+/* Empty state */
+.empty-state {
+  @apply flex items-center justify-center rounded-lg border border-dashed border-neutral-800 bg-neutral-900/40 px-6 py-12 text-sm text-neutral-400;
+}
+
+/* KPI cards */
+.kpi-card {
+  @apply p-5 rounded-xl border border-neutral-800 bg-neutral-900/60 shadow-lg backdrop-blur-sm;
+}
+.kpi-value {
+  @apply text-2xl font-semibold text-neutral-100;
+}
+.kpi-label {
+  @apply text-xs uppercase tracking-wide text-neutral-400;
+}

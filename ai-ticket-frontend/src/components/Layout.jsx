@@ -22,7 +22,7 @@ export default function Layout({ children }) {
       <header className="sticky top-0 z-40 border-b border-neutral-800 bg-neutral-950/80 backdrop-blur">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-8 w-8 rounded-md bg-sky-600" />
+            <div className="h-8 w-8 rounded-md bg-gradient-to-br from-sky-600 to-cyan-500" />
             <Link
               to="/"
               className="text-sm font-semibold tracking-wide text-neutral-200"
@@ -34,6 +34,9 @@ export default function Layout({ children }) {
             <Link to="/" className="hover:text-white">
               Home
             </Link>
+            <Link to="/moderator" className="hover:text-white">
+              Moderator
+            </Link>
             <Link to="/admin" className="hover:text-white">
               Admin
             </Link>
@@ -43,9 +46,7 @@ export default function Layout({ children }) {
               <div className="hidden sm:flex items-center gap-2 text-xs text-neutral-400">
                 <span className="truncate max-w-[12rem]">{user.email}</span>
                 {user.role && (
-                  <span className="rounded-full border border-neutral-700 px-2 py-0.5 text-[10px] uppercase tracking-wide text-neutral-300">
-                    {user.role}
-                  </span>
+                  <span className="badge uppercase">{user.role}</span>
                 )}
               </div>
             ) : null}

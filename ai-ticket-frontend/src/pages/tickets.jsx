@@ -59,8 +59,8 @@ export default function Tickets() {
   };
 
   return (
-    <div className="space-y-8">
-      <section>
+    <div className="grid gap-8 lg:grid-cols-3">
+      <section className="lg:col-span-1">
         <h2 className="section-title mb-4">Create Ticket</h2>
         <form onSubmit={handleSubmit} className="card p-6 space-y-4">
           <div>
@@ -89,19 +89,45 @@ export default function Tickets() {
               {loading ? "Submitting..." : "Submit Ticket"}
             </button>
           </div>
+          <p className="text-xs text-neutral-400">
+            After submission, AI-generated helpful notes and priority will be
+            available on the ticket details page.
+          </p>
         </form>
       </section>
 
-      <section>
-        <h2 className="section-title mb-4">All Tickets</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="lg:col-span-2">
+        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="section-title">All Tickets</h2>
+          <div className="flex items-center gap-2 text-xs">
+            <select className="w-40" disabled>
+              <option>Filter by status (UI only)</option>
+            </select>
+            <select className="w-40" disabled>
+              <option>Filter by priority (UI only)</option>
+            </select>
+          </div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           {tickets.map((ticket) => (
             <Link
               key={ticket._id}
               className="card p-4 hover:border-sky-700 hover:shadow-sky-900/10 transition"
               to={`/tickets/${ticket._id}`}
             >
-              <h3 className="font-semibold text-neutral-100">{ticket.title}</h3>
+              <div className="flex items-start justify-between gap-3">
+                <h3 className="font-semibold text-neutral-100 line-clamp-2">
+                  {ticket.title}
+                </h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {ticket.status && (
+                    <span className="badge">{ticket.status}</span>
+                  )}
+                  {ticket.priority && (
+                    <span className="badge">{ticket.priority}</span>
+                  )}
+                </div>
+              </div>
               <p className="mt-1 line-clamp-3 text-sm text-neutral-400">
                 {ticket.description}
               </p>
@@ -112,7 +138,7 @@ export default function Tickets() {
           ))}
         </div>
         {tickets.length === 0 && (
-          <p className="text-sm text-neutral-400">No tickets submitted yet.</p>
+          <div className="empty-state">No tickets submitted yet.</div>
         )}
       </section>
     </div>

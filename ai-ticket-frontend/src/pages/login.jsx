@@ -42,13 +42,23 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       <div className="hidden lg:flex items-center justify-center p-12 border-r border-neutral-800 bg-gradient-to-b from-sky-900/20 to-neutral-900">
-        <div className="max-w-md text-center">
-          <div className="mx-auto mb-6 h-12 w-12 rounded-lg bg-sky-600" />
-          <h1 className="text-2xl font-semibold">Atlas Helpdesk</h1>
-          <p className="mt-2 text-neutral-400">
-            AI-assisted ticketing for teams. Create issues, track status, and
-            collaborate.
-          </p>
+        <div className="max-w-md">
+          <div className="mx-auto mb-6 h-12 w-12 rounded-lg bg-gradient-to-br from-sky-600 to-cyan-500" />
+          <h1 className="text-2xl font-semibold text-center">Atlas Helpdesk</h1>
+          <ul className="mt-4 space-y-2 text-sm text-neutral-300">
+            <li className="flex items-start gap-2">
+              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-sky-500" />
+              AI helpful notes on each ticket
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-sky-500" />
+              Priority assignment and status tracking
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-1 h-1.5 w-1.5 rounded-full bg-sky-500" />
+              Role-based dashboards for users, moderators, and admins
+            </li>
+          </ul>
         </div>
       </div>
       <div className="flex items-center justify-center p-6">
