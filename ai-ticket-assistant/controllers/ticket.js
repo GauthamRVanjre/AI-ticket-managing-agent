@@ -88,3 +88,27 @@ export const getTicket = async (req, res) => {
     });
   }
 };
+
+export const updateTicket = async (req, res) => {
+  try {
+    const { status } = req.body;
+    let ticket;
+    const id = req.params.id;
+
+    ticket = await Ticket.findById(id);
+
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket Not Found" });
+    }
+
+    const updatedTicket = await Ticket.findByIdAndUpdate(id, {
+      status,
+    });
+
+    return res.status(200).json(updatedTicket);
+  } catch (error) {
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};

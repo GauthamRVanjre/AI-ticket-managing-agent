@@ -79,9 +79,15 @@ An AI-assisted ticketing system designed for SaaS & e-commerce businesses that a
 
 ## Pending Tasks
 
-- Remove filters even from admin
-- Try to complete the KPI part
-- Only users should be able to create the tickets
+- Try to complete the KPI part, need some tips in the backend implementation
+- Only users should be able to create the tickets which means there should be separate page
+  to create ticket and another page to see ticket status
 - admin screen will be tab based
   - 1. users - to manage users
   - 2. Tickets - to manage tickets
+- moderator screen will have only one screen but with jira kinda dashboard to move the tickets
+  to different statuses
+- Coming to Navbar in layout.tsx, I want you to separate pages according to user roles as mentioned in the above three points
+
+- Add pagination in Admin.jsx for both users and tickets tab
+- The KPI calculation is not complete

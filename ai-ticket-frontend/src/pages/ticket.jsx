@@ -86,7 +86,9 @@ export default function TicketDetailsPage() {
 
         {ticket.helpfulNotes && (
           <div className="pt-4 border-t border-neutral-800 space-y-2">
-            <div className="text-sm text-neutral-400">Helpful Notes</div>
+            <div className="text-sm text-neutral-400">
+              AI-generated Helpful Notes
+            </div>
             <div className="rounded-md border border-neutral-800 bg-neutral-900 p-3 text-sm text-neutral-300">
               <ReactMarkdown>{ticket.helpfulNotes}</ReactMarkdown>
             </div>
