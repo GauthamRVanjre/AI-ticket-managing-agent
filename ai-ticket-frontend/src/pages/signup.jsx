@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignupPage() {
@@ -30,12 +31,15 @@ export default function SignupPage() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success("Account created successfully! Welcome aboard!");
         navigate("/");
       } else {
-        alert(data.message || "Signup failed");
+        toast.error(data.message || "Signup failed. Please try again.");
       }
     } catch (err) {
-      alert("Something went wrong");
+      toast.error(
+        "Something went wrong. Please check your connection and try again."
+      );
       console.error(err);
     } finally {
       setLoading(false);

@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import User from "../models/user.js";
 import jwt from "jsonwebtoken";
 import { inngest } from "../inngest/index.js";
+import User from "../models/user.js";
 
 export const signUp = async (req, res) => {
   try {
@@ -122,6 +122,20 @@ export const getUsers = async (req, res) => {
     }
     const users = await User.find().select("-password");
     return res.json(users);
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const getModerators = async (req, res) => {
+  try {
+    if (req.user?.role !== "admin") {
+      return res.status(403).json({ error: "Not authorized" });
+    }
+    const moderators = await User.find({ role: "moderator" })
+      .select("_id email skills")
+      .sort({ email: 1 });
+    return res.json(moderators);
   } catch (error) {
     return res.status(500).json({ error: "Internal server error" });
   }

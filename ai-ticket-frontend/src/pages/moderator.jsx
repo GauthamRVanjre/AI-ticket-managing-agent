@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function ModeratorDashboard() {
@@ -37,6 +38,7 @@ export default function ModeratorDashboard() {
       setTickets(data || []);
     } catch (err) {
       console.error("Failed to fetch tickets:", err);
+      toast.error("Failed to load tickets. Please refresh the page.");
     } finally {
       setLoading(false);
     }
@@ -93,10 +95,18 @@ export default function ModeratorDashboard() {
               : ticket
           )
         );
+
+        const statusText =
+          statusColumns.find((col) => col.id === newStatus)?.title || newStatus;
+        toast.success(`Ticket status updated to ${statusText}`);
       } else {
+        toast.error("Failed to update ticket status. Please try again.");
         console.error("Failed to update ticket status");
       }
     } catch (err) {
+      toast.error(
+        "Error updating ticket status. Please check your connection."
+      );
       console.error("Error updating ticket status:", err);
     }
 

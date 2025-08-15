@@ -1,4 +1,5 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
@@ -27,12 +28,17 @@ export default function LoginPage() {
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
+        toast.success(`Welcome back, ${data.user.email}!`);
         navigate("/");
       } else {
-        alert(data.message || "Login failed");
+        toast.error(
+          data.message || "Login failed. Please check your credentials."
+        );
       }
     } catch (err) {
-      alert("Something went wrong");
+      toast.error(
+        "Something went wrong. Please check your connection and try again."
+      );
       console.error(err);
     } finally {
       setLoading(false);

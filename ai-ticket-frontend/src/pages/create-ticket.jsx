@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateTicket() {
@@ -29,11 +30,19 @@ export default function CreateTicket() {
 
       if (res.ok) {
         setForm({ title: "", description: "" });
+        toast.success(
+          "Ticket created successfully! A moderator will be assigned to your ticket shortly."
+        );
+        navigate("/my-tickets");
       } else {
-        alert(data.message || "Ticket creation failed");
+        toast.error(
+          data.message || "Ticket creation failed. Please try again."
+        );
       }
     } catch (err) {
-      alert("Error creating ticket");
+      toast.error(
+        "Error creating ticket. Please check your connection and try again."
+      );
       console.error(err);
     } finally {
       setLoading(false);
