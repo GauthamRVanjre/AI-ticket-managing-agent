@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CheckAuth = ({ children, protectedRoute }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
+  function isTokenExpired(token) {
+    if (!token) return true; // No token = expired
+    try {
+      const decoded = jwtDecode(token);
+      if (!decoded.exp) return true;
+      return decoded.exp * 1000 < Date.now();
+    } catch (err) {
+      return true;
+    }
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -16,6 +27,10 @@ const CheckAuth = ({ children, protectedRoute }) => {
       }
     } else {
       if (token) {
+        if (isTokenExpired(token)) {
+          navigate("/login"); // Redirect to login
+          return;
+        }
         navigate("/");
       } else {
         setLoading(false);

@@ -44,7 +44,7 @@ export default function MyTickets() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-        {tickets.map((ticket) => (
+        {tickets?.map((ticket) => (
           <Link
             key={ticket._id}
             className="card p-4 hover:border-sky-700 hover:shadow-sky-900/10 transition"

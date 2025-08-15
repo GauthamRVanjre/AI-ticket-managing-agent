@@ -263,7 +263,7 @@ export default function AdminPanel() {
             onChange={handleTicketSearch}
           />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredTickets.map((ticket) => (
+            {filteredTickets?.map((ticket) => (
               <Link to={`/tickets/${ticket._id}`}>
                 <div key={ticket._id} className="card p-4">
                   <div className="flex items-start justify-between gap-3 mb-2">

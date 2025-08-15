@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function ModeratorDashboard() {
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [draggedTicket, setDraggedTicket] = useState(null);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
 
@@ -56,6 +58,10 @@ export default function ModeratorDashboard() {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+  };
+
+  const handleClick = (ticket) => {
+    navigate(`/tickets/${ticket._id}`);
   };
 
   const handleDrop = async (e, newStatus) => {
@@ -133,7 +139,10 @@ export default function ModeratorDashboard() {
                   draggable
                   onDragStart={(e) => handleDragStart(e, ticket)}
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                  <div
+                    className="flex items-start justify-between gap-2 mb-2 cursor-pointer hover:underline"
+                    onClick={() => handleClick(ticket)}
+                  >
                     <h4 className="font-medium text-neutral-100 text-sm line-clamp-2">
                       {ticket.title}
                     </h4>
