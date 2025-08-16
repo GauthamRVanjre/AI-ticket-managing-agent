@@ -39,7 +39,7 @@ function RoleBasedRedirect() {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Toaster
+    {/* <Toaster
       position="top-right"
       toastOptions={{
         duration: 4000,
@@ -61,7 +61,7 @@ createRoot(document.getElementById("root")).render(
           },
         },
       }}
-    />
+    > */}
     <BrowserRouter>
       <Routes>
         <Route
@@ -186,7 +186,7 @@ createRoot(document.getElementById("root")).render(
           }
         />
       </Routes>
-      {/* </Toaster> */}
     </BrowserRouter>
+    {/* </Toaster> */}
   </StrictMode>
 );
