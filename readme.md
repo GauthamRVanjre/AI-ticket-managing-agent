@@ -4,6 +4,12 @@
 
 An AI-assisted ticketing system designed for SaaS & e-commerce businesses that automatically categorizes, prioritizes, and routes customer queries to the right support agents, while giving admins real-time visibility of the support pipeline.
 
+## Potential use cases
+
+- Customer service centers
+- IT Service Management
+- Healthcare & Telemedicine Support
+
 ---
 
 ## Core Features
@@ -22,7 +28,7 @@ An AI-assisted ticketing system designed for SaaS & e-commerce businesses that a
 ### 2. User Portal (Customer View)
 
 - **Submit Ticket Form**: Title, description, optional category.
-- **AI Helpful Notes Display**: After ticket submission, AI provides instant helpful suggestions.
+- **AI Helpful Notes Display**: After ticket submission, AI agent provides instant helpful suggestions.
 - **Ticket Status Tracker**: View ticket status (Pending, In Progress, Resolved).
 
 ---
@@ -44,6 +50,8 @@ An AI-assisted ticketing system designed for SaaS & e-commerce businesses that a
   - Ticket volume trends.
   - Moderator performance metrics.
 - **Referral Tracking**: View referral-based sign-ups and role assignments.
+- **Add Users to the system**: Onboard new users to the system.
+- **Add or Edit skills of moderators**: Moderators skill level can be tracked by Admin.
 
 ---
 
@@ -76,18 +84,3 @@ An AI-assisted ticketing system designed for SaaS & e-commerce businesses that a
 - Basic analytics in Admin dashboard.
 
 ---
-
-## Pending Tasks
-
-- Try to complete the KPI part, need some tips in the backend implementation
-- Only users should be able to create the tickets which means there should be separate page
-  to create ticket and another page to see ticket status
-- admin screen will be tab based
-  - 1. users - to manage users
-  - 2. Tickets - to manage tickets
-- moderator screen will have only one screen but with jira kinda dashboard to move the tickets
-  to different statuses
-- Coming to Navbar in layout.tsx, I want you to separate pages according to user roles as mentioned in the above three points
-
-- Add pagination in Admin.jsx for both users and tickets tab
-- The KPI calculation is not complete
