@@ -1,5 +1,5 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 export default function Layout({ children }) {
   const navigate = useNavigate();
@@ -86,8 +86,32 @@ export default function Layout({ children }) {
           </div>
         </div>
       </header>
-
-      <main className="mx-auto w-full max-w-6xl px-4 py-6">{children}</main>
+      <main className="mx-auto w-full max-w-6xl px-4 py-6">
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: "#1f2937",
+              color: "#f9fafb",
+              border: "1px solid #374151",
+            },
+            success: {
+              iconTheme: {
+                primary: "#10b981",
+                secondary: "#f9fafb",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#f9fafb",
+              },
+            },
+          }}
+        />
+        {children}
+      </main>
     </div>
   );
 }
